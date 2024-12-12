@@ -62,3 +62,25 @@ prefix(Prefix, [X | Tail]) :- (Prefix =:= X).
 sufix(Sufix, [Sufix | []]) :- !.
 sufix(Sufix, [X | Tail]) :- sufix(Sufix, Tail).
 
+append([], L2, L2).
+append([X | Tail1], L2, [X | TailR]) :- append(Tail1, L2, TailR).
+
+insert_comeco(X, L1, [X | L1]).
+
+insert_fim(X, [], [X]).
+insert_fim(X, [Y | TailL1], R) :-
+    insert_fim(X, TailL1, R1),
+    R = [Y | R1], 
+    !.
+
+delete(_, [], []).
+delete(X, [Y | Tail], R) :-
+  (X =:= Y) -> (   
+                    delete(X, Tail, R1),
+                    R = R1
+                ); (   
+                    delete(X, Tail, R2),
+                    R = [Y | R2]
+                    ),
+  !.
+
