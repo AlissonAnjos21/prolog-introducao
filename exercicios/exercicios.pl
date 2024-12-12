@@ -84,3 +84,13 @@ delete(X, [Y | Tail], R) :-
                     ),
   !.
 
+
+remove(_, [], []).
+remove(X, [Y | Tail], R) :-
+	(X =:= Y) -> (   
+    			        	  R = Tail
+                ); (   
+                      remove(X, Tail, R2),
+                      R = [Y | R2]
+				            ),
+    !.
