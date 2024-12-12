@@ -6,7 +6,7 @@ livro(autor1, titulox, anox).
 livro(autor2, tituloy, anoy).
 livro(autor1, tituloz, anoz).
 
-%----------------------------------------------------------------------
+%-----------------------------------------------------------------------
 
 homem(Homem). 
 mulher(Mulher). 
@@ -43,3 +43,22 @@ mod(X, Y, Z) :-
   W is X div Y,
   K is W * Y,
   Z is X - K.
+
+%-----------------------------------------------------------------------
+
+list([]).
+list([X | Tail]) :- write(X), nl, list(Tail).
+
+member(X, [X | _]).
+member(X, [_ | Tail]) :- member(X, Tail).
+
+not_member(_, []) :- !.
+not_member(X, [E | Tail]) :- 
+    (X \= E),
+    not_member(X, Tail).
+
+prefix(Prefix, [X | Tail]) :- (Prefix =:= X).
+
+sufix(Sufix, [Sufix | []]) :- !.
+sufix(Sufix, [X | Tail]) :- sufix(Sufix, Tail).
+
